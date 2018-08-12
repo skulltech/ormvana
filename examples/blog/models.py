@@ -21,7 +21,7 @@ def connect(db=None):
         charset='utf8')
 
 
-shinyORM.get_connection = connect
+shinyORM.connection = connect
 
 
 class User(Model):
@@ -32,7 +32,7 @@ class User(Model):
             'value': 0
         }
     }
-    for field in ['username', 'email', 'first_name', 'last_name']:
+    for field in ['username', 'password', 'email', 'first_name', 'last_name']:
         fields[field] = {'type': str}
 
 
@@ -46,5 +46,6 @@ class Post(Model):
 
     @classmethod
     @Model.fetch_multiple
-    def users_posts(cls, user_id):
-        return '''SELECT * FROM `{0}` WHERE `author`={1}'''.format(cls.name, user_id)
+    def users_posts(cls, username):
+        return '''SELECT * FROM `{0}` WHERE `author`=(SELECT id from `user` WHERE username={1})'''.format(cls.name,
+                                                                                                          username)
