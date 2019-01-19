@@ -1,6 +1,8 @@
 # ormvana
 A minimalist ORM for the power user — Releases you from the sufferings of the traditional ORM world.
 
+[![PyPI version](https://badge.fury.io/py/ormvana.svg)](https://badge.fury.io/py/ormvana)
+
 ## Usage
 
 Using `ormvana` is as simple as:
